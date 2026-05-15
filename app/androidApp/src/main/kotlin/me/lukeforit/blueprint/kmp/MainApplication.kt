@@ -4,7 +4,7 @@ import android.app.Application
 import dev.zacsweers.metro.createGraphFactory
 import dev.zacsweers.metrox.android.MetroAppComponentProviders
 import dev.zacsweers.metrox.android.MetroApplication
-import me.lukeforit.blueprint.kmp.shared.common.di.AndroidAppGraph
+import me.lukeforit.blueprint.kmp.di.AndroidAppGraph
 
 class MainApplication : Application(), MetroApplication {
     

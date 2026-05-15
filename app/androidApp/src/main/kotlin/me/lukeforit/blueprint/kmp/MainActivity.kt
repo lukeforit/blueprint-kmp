@@ -10,7 +10,7 @@ import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.android.ActivityKey
 import me.lukeforit.blueprint.kmp.app.App
-import me.lukeforit.blueprint.kmp.shared.common.di.AndroidAppGraph
+import me.lukeforit.blueprint.kmp.di.AndroidAppGraph
 
 @android.annotation.SuppressLint("Instantiatable")
 @ActivityKey(MainActivity::class)

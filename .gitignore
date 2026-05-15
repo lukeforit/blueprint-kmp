@@ -1,0 +1,11 @@
+build/
+.gradle/
+.idea/
+*.class
+*.log
+local.properties
+node_modules
+.DS_Store
+kotlin-js-store/
+bin/
+.kotlin/

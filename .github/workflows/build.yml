@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+concurrency:
+  # Cancels pending or running jobs for the same branch/PR to save CI minutes on private repos
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build All Targets (except iOS)
+    runs-on: ubuntu-latest # Running on Linux automatically avoids iOS compilation while supporting Android, JVM, JS, Wasm, and Server. Linux runners are also the cheapest and fastest option.
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build with Gradle
+        # We use --build-cache to utilize the cached outputs from previous builds.
+        # --parallel enables parallel execution for decoupled projects.
+        # --no-daemon is recommended for CI to avoid overhead of keeping the daemon alive.
+        run: ./gradlew build --build-cache --parallel --no-daemon
